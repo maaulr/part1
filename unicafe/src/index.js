@@ -15,13 +15,37 @@ const Feedback = (props) => {
   )
 }
 
+const Statistic = ({text, value}) => {
+  return (
+    <>
+      <p>{text} {value}</p>
+    </>
+  )
+}
+
 const Statistics = ({good, neutral, bad}) => {
+  const allClicks = good + neutral + bad
+  const average = (good*1 + neutral*0 + bad*-1)/allClicks
+  const positive = good/allClicks*100
+
+  if (allClicks === 0) {
+    return (
+      <div>
+        <h1>Statistics</h1>
+        <p>No feedback given</p>
+      </div>
+    )
+  }
+
   return (
     <div>
       <h1>Statistics</h1>
-      <p>good {good}</p>
-      <p>neutral {neutral}</p>
-      <p>bad {bad}</p>
+      <Statistic text="good" value={good}/>
+      <Statistic text="neutral" value={neutral}/>
+      <Statistic text="bad" value={bad}/>
+      <Statistic text="all" value={good + neutral + bad}/>
+      <Statistic text="average" value={average}/>
+      <Statistic text="positive" value={`${positive}%`}/>
     </div>
   )
 }
