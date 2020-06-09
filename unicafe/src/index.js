@@ -3,11 +3,27 @@ import ReactDOM from 'react-dom';
 // import * as serviceWorker from './serviceWorker';
 
 const Feedback = () => {
-  return (<></>)
+  return (
+    <div>
+      <h1>Give feedback</h1>
+      <div>
+        <button>good</button>
+        <button>neutral</button>
+        <button>bad</button>
+      </div>
+    </div>
+  )
 }
 
 const Statistics = () => {
-  return (<></>)
+  return (
+    <div>
+      <h1>Statistics</h1>
+      <p>good</p>
+      <p>neutral</p>
+      <p>bad</p>
+    </div>
+  )
 }
 
 const App = () => {
