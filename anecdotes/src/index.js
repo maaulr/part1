@@ -11,16 +11,28 @@ const anecdotes_obj = {
   5:{'text': 'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.', 'points':0}
 }
 
+const Anecdote = (props) => {
+  return (
+    <div>
+      <p>{props.anecd.text}</p>
+      <p>has {props.anecd.points} votes</p>
+    </div>
+  )
+}
+
 const App = (props) => {
   const [selected, setSelected] = useState(0)
   const [anecdotes, setAnecdotes] = useState(props.anecdotes_obj)
-  console.log(anecdotes)
-  console.log(anecdotes[selected].text)
+
+  const handleNextButton = () => {
+    setSelected(Math.floor(Math.random() * Math.floor(Object.keys(anecdotes).length)))
+  }
 
   return (
     <div>
       <h1>anecdotes</h1>
-      <p>{anecdotes[selected].text}</p>
+      <Anecdote anecd={anecdotes[selected]}/>
+      <button onClick={()=>handleNextButton()}>next</button>
     </div>
   )
 }
