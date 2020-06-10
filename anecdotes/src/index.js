@@ -28,11 +28,18 @@ const App = (props) => {
     setSelected(Math.floor(Math.random() * Math.floor(Object.keys(anecdotes).length)))
   }
 
+  const handleVoteButton = () => {
+    let new_anecdotes = {...anecdotes}
+    new_anecdotes[selected].points = new_anecdotes[selected].points + 1
+    setAnecdotes(new_anecdotes)
+  }
+
   return (
     <div>
       <h1>anecdotes</h1>
       <Anecdote anecd={anecdotes[selected]}/>
       <button onClick={()=>handleNextButton()}>next</button>
+      <button onClick={()=>handleVoteButton()}>vote</button>
     </div>
   )
 }
