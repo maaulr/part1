@@ -11,6 +11,24 @@ const anecdotes_obj = {
   5:{'text': 'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.', 'points':0}
 }
 
+function checkMostVoted(obj) {
+  //return an int(key) -> anecdote
+  //return null if obj has empty property
+  let maxVote = 0
+  let maxVoteKey = 0
+
+  if (Object.keys(obj).length === 0) {return null}
+  
+  for(let key in obj){
+    if (obj[key].points >= maxVote){
+      maxVote = obj[key].points
+      maxVoteKey = key
+    }
+  }
+
+  return maxVoteKey
+}
+
 const Anecdote = (props) => {
   return (
     <div>
@@ -23,6 +41,7 @@ const Anecdote = (props) => {
 const App = (props) => {
   const [selected, setSelected] = useState(0)
   const [anecdotes, setAnecdotes] = useState(props.anecdotes_obj)
+  const [mostVoted, setMostVoted] = useState(0)
 
   const handleNextButton = () => {
     setSelected(Math.floor(Math.random() * Math.floor(Object.keys(anecdotes).length)))
@@ -32,14 +51,18 @@ const App = (props) => {
     let new_anecdotes = {...anecdotes}
     new_anecdotes[selected].points = new_anecdotes[selected].points + 1
     setAnecdotes(new_anecdotes)
+    let key = checkMostVoted(anecdotes)
+    setMostVoted(key)
   }
 
   return (
     <div>
-      <h1>anecdotes</h1>
+      <h1>Anecdote of the day</h1>
       <Anecdote anecd={anecdotes[selected]}/>
       <button onClick={()=>handleNextButton()}>next</button>
       <button onClick={()=>handleVoteButton()}>vote</button>
+      <h1>Anecdote with most vote</h1>
+      <Anecdote anecd={anecdotes[mostVoted]}/>
     </div>
   )
 }
